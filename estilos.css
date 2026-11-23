@@ -1,0 +1,966 @@
+:root {
+  color-scheme: light;
+  --papel: #f8f6f0;
+  --blanco: #fffefa;
+  --tinta: #182e32;
+  --texto: #3c5152;
+  --secundario: #506563;
+  --acento: #0a7164;
+  --linea: #d9e0d9;
+  --pista: #e9efe9;
+  --barra-portugal: #137e71;
+  --barra-resto: #687d84;
+  --nota: #e8f1e9;
+  --radio: 1.25rem;
+  --titular: Georgia, "Times New Roman", serif;
+  --lectura: "Segoe UI", system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--lectura);
+  line-height: 1.55;
+}
+
+h1, h2, p, figure, dl, dd {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+section[id] {
+  scroll-margin-top: 1.25rem;
+}
+
+.contenedor {
+  width: min(100% - 4rem, 72rem);
+  margin-inline: auto;
+}
+
+.solo-lectores, .saltar:not(:focus) {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.saltar:focus {
+  position: absolute;
+  z-index: 2;
+  inset: 0.75rem auto auto 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--blanco);
+}
+
+.cabecera {
+  border-top: 4px solid var(--acento);
+  border-bottom: 1px solid var(--linea);
+}
+
+.cabecera-interior {
+  min-height: 4.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem 2rem;
+}
+
+.marca, .navegacion a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  text-decoration: none;
+}
+
+.marca {
+  gap: 0.75rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.marca-icono {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.165rem;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0.46rem;
+  border-radius: 0.45rem;
+  background: var(--acento);
+}
+
+.marca-icono i {
+  width: 0.2rem;
+  height: 70%;
+  border-radius: 1px;
+  background: #eaf6f0;
+}
+
+.marca-icono i:first-child {
+  height: 42%;
+}
+
+.marca-icono i:last-child {
+  height: 100%;
+}
+
+.navegacion {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: clamp(1rem, 2.75vw, 2rem);
+}
+
+.navegacion a {
+  color: var(--secundario);
+  font-size: 0.91rem;
+  font-weight: 650;
+}
+
+.navegacion a:hover {
+  color: var(--acento);
+  text-decoration: underline;
+}
+
+.portada {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 1fr);
+  align-items: center;
+  column-gap: clamp(2.3rem, 6vw, 5.75rem);
+  row-gap: 2rem;
+  padding-block: clamp(3.75rem, 7.3vw, 7.25rem) clamp(2.5rem, 5.15vw, 4.5rem);
+}
+
+.contexto {
+  color: var(--acento);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.095em;
+  text-transform: uppercase;
+}
+
+h1, .escena h2 {
+  font-family: var(--titular);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+h1 {
+  margin-block: 1rem 1.55rem;
+  font-size: clamp(3.25rem, 6.15vw, 6rem);
+}
+
+h1 em, .escena h2 em {
+  color: var(--acento);
+  font-weight: inherit;
+}
+
+.entradilla, .escena-encabezado > p:last-child {
+  max-width: 52ch;
+  color: var(--texto);
+  font-size: clamp(1rem, 1.45vw, 1.16rem);
+  line-height: 1.66;
+}
+
+.grafico {
+  --relleno-portugal: var(--barra-portugal);
+  --relleno-resto: var(--barra-resto);
+  min-width: 0;
+  padding: clamp(1rem, 3.1vw, 2rem);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--blanco);
+}
+
+.grafico-principal {
+  box-shadow: 0 16px 45px -29px #1c403450;
+}
+
+.grafico-titulo, .grafico-contexto {
+  display: block;
+}
+
+.grafico-titulo {
+  font-size: clamp(1.16rem, 2.1vw, 1.44rem);
+  font-weight: 750;
+  letter-spacing: -0.033em;
+  line-height: 1.25;
+}
+
+.grafico-contexto {
+  margin-top: 0.23rem;
+  color: var(--secundario);
+  font-size: 0.89rem;
+}
+
+.barras {
+  display: grid;
+  gap: 1.15rem;
+  margin: 1.45rem 0 0.6rem;
+  padding: 0;
+  list-style: none;
+}
+
+.barra-datos {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.4rem 0.8rem;
+  margin-bottom: 0.35rem;
+}
+
+.barra-grupo {
+  color: var(--texto);
+  font-size: 0.92rem;
+  font-weight: 680;
+  line-height: 1.23;
+}
+
+.barra-valor {
+  color: var(--tinta);
+  font-size: clamp(1.13rem, 2vw, 1.45rem);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.barra[data-origen="portugal"] .barra-valor {
+  color: var(--acento);
+}
+
+.barra-pista {
+  height: 0.67rem;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--pista);
+}
+
+.barra-relleno {
+  width: 0;
+  height: 100%;
+  background: var(--relleno-resto);
+}
+
+.barra[data-origen="portugal"] .barra-relleno {
+  background: var(--relleno-portugal);
+}
+
+.barra-base {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--secundario);
+  font-size: 0.79rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.escala {
+  position: relative;
+  height: 1.3rem;
+  margin-top: 0.65rem;
+  border-top: 1px solid var(--linea);
+  color: var(--secundario);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.escala span {
+  position: absolute;
+  top: 0.25rem;
+  white-space: nowrap;
+}
+
+.escala span::before {
+  position: absolute;
+  top: -0.3rem;
+  left: 50%;
+  width: 1px;
+  height: 0.2rem;
+  background: currentColor;
+  content: "";
+}
+
+.escala span:first-child::before { left: 0; }
+.escala span:last-child::before { left: auto; right: 0; }
+
+.escala span:nth-child(2), .escala span:nth-child(3), .escala span:nth-child(4) {
+  transform: translateX(-50%);
+}
+
+.escala span:nth-child(2) { left: 25%; }
+.escala span:nth-child(3) { left: 50%; }
+.escala span:nth-child(4) { left: 75%; }
+.escala span:last-child { right: 0; }
+
+.diferencia {
+  margin-top: 1.1rem;
+  padding: 0.66rem 0.82rem;
+  border-left: 2px solid var(--acento);
+  border-radius: 0 0.28rem 0.28rem 0;
+  background: var(--nota);
+  color: var(--acento);
+  font-size: 0.86rem;
+  font-weight: 720;
+}
+
+.muestra {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding-block: 1.15rem;
+  border-block: 1px solid var(--linea);
+}
+
+.muestra div {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0.28rem;
+  padding-inline: clamp(0.65rem, 3vw, 2rem);
+  border-inline-start: 1px solid var(--linea);
+}
+
+.muestra div:first-child {
+  padding-inline-start: 0;
+  border-inline-start: 0;
+}
+
+.muestra dt {
+  color: var(--secundario);
+  font-size: clamp(0.72rem, 1.5vw, 0.89rem);
+  line-height: 1.35;
+}
+
+.muestra dd {
+  font-size: clamp(1.05rem, 3.6vw, 1.9rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 680;
+  letter-spacing: -0.045em;
+  line-height: 1.16;
+}
+
+.aviso {
+  margin-top: 1rem;
+  color: var(--texto);
+}
+
+.escena {
+  padding-block: clamp(3.4rem, 8vw, 6.6rem);
+}
+
+.escena h2 {
+  margin-block: 0.7rem 1.1rem;
+  font-size: clamp(2.55rem, 4.55vw, 4.45rem);
+}
+
+.escena-encabezado {
+  max-width: 44rem;
+}
+
+.escena-encabezado > p:last-child:not(.contexto) {
+  margin-top: 0.5rem;
+}
+
+.posicion-paises {
+  margin-top: 1.75rem;
+}
+
+.posicion-paises h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.25rem;
+}
+
+#posicion-universo {
+  max-width: 74ch;
+  color: var(--texto);
+  font-size: 0.93rem;
+}
+
+.rejilla-posicion {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.posicion-tarjeta {
+  padding: clamp(1rem, 2.2vw, 1.45rem);
+}
+
+.posicion-tarjeta .grafico-titulo {
+  font-size: 1.05rem;
+}
+
+.posicion-frase {
+  margin-top: 0.4rem;
+}
+
+.posicion-frase strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--acento);
+  font-family: var(--titular);
+  font-size: clamp(2.25rem, 4.5vw, 3.15rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 1.07;
+}
+
+.posicion-tasa {
+  color: var(--secundario);
+  font-size: 0.82rem;
+}
+
+.posicion-pista {
+  position: relative;
+  display: flex;
+  height: 0.95rem;
+  margin-top: 0.65rem;
+}
+
+.posicion-pista span {
+  flex-basis: 0;
+}
+
+.posicion-inferiores { background: var(--barra-portugal); }
+.posicion-empates { background: var(--nota); }
+.posicion-superiores { background: var(--barra-resto); }
+
+.posicion-pista::after {
+  position: absolute;
+  inset-block: -0.18rem;
+  inset-inline-start: var(--rango-portugal);
+  border-inline-start: 2px solid var(--tinta);
+  transform: translateX(-50%);
+  content: "";
+}
+
+.posicion-leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin: 0.65rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--secundario);
+  font-size: 0.82rem;
+}
+
+.posicion-leyenda li::before {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-inline-end: 0.35rem;
+  border-radius: 50%;
+  content: "";
+}
+
+.detalle-inferiores::before { background: var(--barra-portugal); }
+.detalle-empates::before { background: var(--nota); }
+.detalle-superiores::before { background: var(--barra-resto); }
+
+.rejilla-paises {
+  display: grid;
+  grid-template-columns: minmax(0, 2.25fr) minmax(0, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: start;
+  margin-top: 2rem;
+}
+
+.grafico-paises h3 {
+  margin: 0;
+}
+
+.selector-paises {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.65rem;
+  margin-top: 0.85rem;
+  font-size: 0.85rem;
+}
+
+.selector-paises label {
+  font-weight: 670;
+}
+
+.selector-paises select {
+  min-height: 2.75rem;
+  max-width: 100%;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--linea);
+  border-radius: 0.5rem;
+  background: var(--blanco);
+  color: var(--tinta);
+  font: inherit;
+}
+
+.selector-paises select:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+.nota-orden-paises {
+  margin-top: 0.45rem;
+  color: var(--secundario);
+  font-size: 0.8rem;
+}
+
+.tabla-paises {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabla-paises th, .tabla-paises td {
+  padding: 0.47rem 0.55rem;
+  border-bottom: 1px solid var(--linea);
+}
+
+.tabla-paises thead {
+  color: var(--secundario);
+  font-size: 0.8rem;
+}
+
+.tabla-paises th {
+  font-weight: 650;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.tabla-paises td, .tabla-paises th:nth-last-child(-n + 2) {
+  text-align: right;
+}
+
+.tabla-paises td {
+  white-space: nowrap;
+}
+
+.tabla-puntos {
+  table-layout: fixed;
+  margin-top: 0.6rem;
+}
+
+.col-origen { width: 25%; }
+.col-puntos { width: 44%; }
+.col-tasa { width: 15%; }
+.col-reservas { width: 16%; }
+
+.tabla-puntos tr[data-codigo="PRT"] {
+  background: var(--nota);
+  color: var(--acento);
+  font-weight: 720;
+}
+
+.eje-paises {
+  position: relative;
+  height: 1.25em;
+  white-space: nowrap;
+}
+
+.eje-paises span { position: absolute; }
+.eje-paises span:first-child { left: 0; }
+.eje-paises span:nth-child(2) { left: 50%; transform: translateX(-50%); }
+.eje-paises span:last-child { right: 0; }
+
+.pais-punto-pista {
+  position: relative;
+  height: 1.1rem;
+  background: linear-gradient(var(--linea), var(--linea)) center / 100% 1px no-repeat;
+}
+
+.pais-punto-pista::before {
+  position: absolute;
+  inset: -0.47rem auto;
+  left: var(--tasa-portugal);
+  border-left: 1px dashed var(--acento);
+  content: "";
+}
+
+.pais-punto {
+  position: absolute;
+  top: 50%;
+  width: 0.53rem;
+  height: 0.53rem;
+  border-radius: 50%;
+  background: var(--barra-resto);
+  transform: translate(-50%, -50%);
+}
+
+[data-codigo="PRT"] .pais-punto {
+  width: 0.68rem;
+  height: 0.68rem;
+  background: var(--barra-portugal);
+}
+
+.leyenda-paises {
+  margin-top: 0.8rem;
+  color: var(--secundario);
+  font-size: 0.8rem;
+}
+
+.leyenda-paises span {
+  display: inline-block;
+  height: 0.8rem;
+  margin-inline: 0.35rem 0.25rem;
+  border-left: 1px dashed var(--acento);
+  vertical-align: -0.13em;
+}
+
+.paises-contexto {
+  min-width: 0;
+  padding: 1.2rem 0 0;
+}
+
+.paises-contexto h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1.12rem;
+  line-height: 1.32;
+}
+
+.paises-casos {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.pais-caso {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--linea);
+  border-radius: 0.75rem;
+  background: var(--blanco);
+}
+
+.pais-caso-contexto, .pais-caso-base {
+  color: var(--secundario);
+  font-size: 0.8rem;
+}
+
+.pais-caso-dato {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin-block: 0.24rem;
+}
+
+.pais-caso-dato h4 {
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.25;
+}
+
+.pais-caso-dato strong {
+  font-size: 1.18rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.pais-caso .pais-punto-pista {
+  margin-block: 0.2rem;
+}
+
+.pais-caso .pais-punto-pista::before {
+  inset-block: 0;
+}
+
+.paises-alcance {
+  margin-top: 0.85rem;
+  color: var(--texto);
+  font-size: 0.86rem;
+}
+
+.rejilla-hoteles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.grafico-hotel {
+  border-top: 3px solid var(--linea);
+}
+
+.grafico-hotel .grafico-titulo {
+  font-family: var(--titular);
+  font-size: clamp(1.65rem, 3.2vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.escena-comprobacion {
+  --tinta: #f1f7f3;
+  --texto: #d0e1da;
+  --secundario: #b6cbc4;
+  --acento: #99e5cf;
+  --linea: #56716b;
+  --blanco: #244448;
+  --pista: #395b5a;
+  --nota: #315654;
+  --barra-portugal: #79d6bf;
+  --barra-resto: #a1b1ba;
+  background: #18363a;
+  color: var(--tinta);
+}
+
+.comprobacion-interior {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.5rem, 6vw, 5.2rem);
+}
+
+.panel-comprobacion {
+  min-width: 0;
+}
+
+.selector {
+  min-width: 0;
+  margin: 0 0 1rem;
+  padding: 0;
+  border: 0;
+}
+
+.selector legend {
+  padding: 0;
+  margin-bottom: 0.4rem;
+  color: var(--texto);
+  font-size: 0.84rem;
+  font-weight: 650;
+}
+
+.opciones {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.25rem;
+  padding: 0.24rem;
+  border: 1px solid var(--linea);
+  border-radius: 0.65rem;
+  background: #112b2f;
+}
+
+.opciones label {
+  position: relative;
+  display: grid;
+}
+
+.opciones input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.opciones span {
+  display: grid;
+  place-items: center;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.5rem;
+  border-radius: 0.4rem;
+  color: var(--texto);
+  cursor: pointer;
+  font-size: 0.83rem;
+  font-weight: 680;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.opciones label:hover span {
+  background: #294a4b;
+}
+
+.opciones input:checked + span {
+  background: #d9f3e8;
+  color: #163638;
+}
+
+.opciones input:focus-visible + span {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+.grafico-comprobacion .barra-relleno {
+  transition: inline-size 210ms ease-out;
+}
+
+.nota-panel {
+  margin-top: 0.65rem;
+  color: var(--secundario);
+  font-size: 0.82rem;
+}
+
+.escena-cierre {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1rem, 6vw, 5.2rem);
+}
+
+.escena-cierre h2 {
+  margin-block: 0;
+}
+
+.cierre-principal {
+  max-width: 42ch;
+  color: var(--texto);
+  font-size: clamp(1.13rem, 2vw, 1.4rem);
+  line-height: 1.55;
+}
+
+.cierre-principal strong {
+  color: var(--tinta);
+  white-space: nowrap;
+}
+
+.pie {
+  padding-block: 2.65rem;
+  border-top: 1px solid var(--linea);
+  background: #edf0e9;
+}
+
+.pie h2 {
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 750;
+}
+
+.pie p {
+  max-width: 68ch;
+  color: var(--texto);
+  font-size: 0.89rem;
+}
+
+.pie p + p {
+  margin-top: 0.4rem;
+}
+
+.pie i {
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .portada, .rejilla-paises, .comprobacion-interior {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .paises-contexto {
+    padding-top: 0;
+  }
+
+  .paises-casos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .portada-texto {
+    max-width: 43rem;
+  }
+
+  .portada h1, .comprobacion-interior h2 {
+    text-wrap: wrap;
+  }
+}
+
+@media (max-width: 700px) {
+  .rejilla-posicion {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .contenedor {
+    width: calc(100% - 2rem);
+  }
+
+  .cabecera-interior {
+    column-gap: 0.6rem;
+    padding-block: 0.35rem;
+  }
+
+  .navegacion a {
+    font-size: 0.83rem;
+  }
+
+  .navegacion {
+    column-gap: 0.65rem;
+  }
+
+  .tabla-paises {
+    font-size: 0.76rem;
+  }
+
+  .tabla-paises thead {
+    font-size: 0.71rem;
+  }
+
+  .tabla-paises th, .tabla-paises td {
+    padding-inline: 0.24rem;
+  }
+
+  .col-origen { width: 27%; }
+  .col-puntos { width: 31%; }
+  .col-tasa { width: 19%; }
+  .col-reservas { width: 23%; }
+
+  .paises-casos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .portada {
+    padding-top: 2.5rem;
+  }
+
+  .rejilla-hoteles, .escena-cierre {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .grafico-comprobacion .barra-relleno {
+    transition: none;
+  }
+}
+
+@media print {
+  .cabecera, .selector {
+    display: none;
+  }
+
+  .grafico {
+    break-inside: avoid;
+  }
+
+  body {
+    print-color-adjust: exact;
+  }
+}

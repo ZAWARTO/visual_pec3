@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Una historia visual sobre las cancelaciones y no presentaciones en dos hoteles de Portugal.">
+  <meta name="color-scheme" content="light">
+  <title>Dos hoteles, una brecha de cancelación</title>
+  <link rel="stylesheet" href="estilos.css">
+  <script src="datos.js" defer></script>
+  <script src="historia.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+  <header class="cabecera" id="inicio">
+    <div class="contenedor cabecera-interior">
+      <a class="marca" href="#inicio">
+        <span class="marca-icono" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>Reservas hoteleras</span>
+      </a>
+      <nav class="navegacion" aria-label="Secciones de la historia">
+        <a href="#brecha">La brecha</a>
+        <a href="#paises">Por país</a>
+        <a href="#hoteles">Por hotel</a>
+        <a href="#comprobacion">Comprobación</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="portada contenedor" id="brecha" aria-labelledby="titulo">
+      <div class="portada-texto">
+        <p class="contexto">Lisboa y Algarve <span aria-hidden="true">·</span> 2015–2017</p>
+        <h1 id="titulo">Dos hoteles, una <em>brecha de cancelación</em></h1>
+        <p class="entradilla">Las reservas de clientes con origen registrado en Portugal se cancelaron o quedaron sin presentación más a menudo que las del resto agrupado. El desglose por país muestra qué orígenes se acercan y cuántas reservas hay detrás de cada tasa.</p>
+      </div>
+      <figure class="grafico grafico-principal" aria-labelledby="titulo-total">
+        <figcaption>
+          <span class="grafico-titulo" id="titulo-total">Cancelación o no presentación</span>
+          <span class="grafico-contexto">Tasa por origen del cliente · Ambos hoteles</span>
+        </figcaption>
+        <div data-grafico="total"></div>
+        <p class="diferencia" data-diferencia="total" hidden></p>
+      </figure>
+    </section>
+
+    <div class="contenedor">
+      <dl class="muestra" aria-label="Cobertura de la comparación">
+        <div>
+          <dt>Reservas tras la limpieza</dt>
+          <dd data-muestra="limpia">117.395</dd>
+        </div>
+        <div>
+          <dt>Con origen informado</dt>
+          <dd data-muestra="con_origen">116.928</dd>
+        </div>
+        <div>
+          <dt>Sin origen registrado</dt>
+          <dd data-muestra="sin_origen">467</dd>
+        </div>
+      </dl>
+      <noscript><p class="aviso">Activa JavaScript en el navegador para ver los gráficos y usar el selector.</p></noscript>
+      <p class="aviso" id="aviso-datos" role="alert" hidden>El archivo datos.js debe estar junto al HTML para mostrar los gráficos.</p>
+    </div>
+
+    <section class="escena contenedor" id="paises" aria-labelledby="titulo-paises">
+      <header class="escena-encabezado">
+        <h2 id="titulo-paises">Portugal destaca <em>entre los orígenes con más reservas</em></h2>
+        <p>El total reúne cancelaciones y no presentaciones. El 23,8 % del resto se calcula agrupando sus reservas, así que los países con más reservas pesan más en esa cifra.</p>
+      </header>
+      <section class="posicion-paises" aria-labelledby="titulo-posicion-paises" hidden>
+        <h3 id="titulo-posicion-paises">Percentiles de Portugal</h3>
+        <p id="posicion-universo"></p>
+        <div id="posicion-portugal" class="rejilla-posicion"></div>
+      </section>
+      <div class="rejilla-paises">
+        <section class="grafico grafico-paises" aria-labelledby="titulo-tasas-paises">
+          <h3 class="grafico-titulo" id="titulo-tasas-paises">Top 10 por tasa total</h3>
+          <p class="grafico-contexto" id="alcance-tasas-paises">Orígenes con 1.000 reservas o más · Ambos hoteles</p>
+          <div class="selector-paises">
+            <label for="medida-paises">Indicador</label>
+            <select id="medida-paises" aria-controls="paises-principales">
+              <option value="canceladas_o_ausentes">Total</option>
+              <option value="solo_canceladas">Solo cancelaciones</option>
+              <option value="solo_no_presentadas">Solo no presentaciones</option>
+            </select>
+          </div>
+          <p class="nota-orden-paises">Las filas se mantienen en orden de tasa total al cambiar el indicador.</p>
+          <p class="leyenda-paises">Cada punto es un país. <span aria-hidden="true"></span> La línea discontinua marca la tasa de Portugal.</p>
+          <p class="solo-lectores" id="resultado-medida-paises" role="status"></p>
+          <table class="tabla-paises tabla-puntos" aria-labelledby="titulo-tasas-paises">
+            <colgroup><col class="col-origen"><col class="col-puntos"><col class="col-tasa"><col class="col-reservas"></colgroup>
+            <thead>
+              <tr>
+                <th scope="col">Origen</th>
+                <th aria-hidden="true"><div class="eje-paises"><span>0</span><span>50</span><span>100 %</span></div></th>
+                <th scope="col">Tasa</th>
+                <th scope="col">Reservas</th>
+              </tr>
+            </thead>
+            <tbody id="paises-principales"></tbody>
+          </table>
+        </section>
+        <aside class="paises-contexto" aria-labelledby="titulo-grupos-menores">
+          <h3 id="titulo-grupos-menores">Con menos reservas aparecen tasas cercanas o superiores</h3>
+          <p class="grafico-contexto">Ejemplos con la tasa total</p>
+          <div id="paises-casos" class="paises-casos"></div>
+          <p id="paises-superiores" class="paises-alcance"></p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="escena contenedor" id="hoteles" aria-labelledby="titulo-hoteles">
+      <header class="escena-encabezado">
+        <p class="contexto">Cancelación o no presentación</p>
+        <h2 id="titulo-hoteles">La brecha es mayor <em>en Lisboa</em></h2>
+        <p>Al volver a la comparación entre Portugal y el resto agrupado, la diferencia se observa en ambos establecimientos. El hotel de Lisboa registra tasas más altas en los dos grupos.</p>
+      </header>
+      <div class="rejilla-hoteles">
+        <figure class="grafico grafico-hotel" aria-labelledby="titulo-urbano">
+          <figcaption>
+            <span class="grafico-titulo" id="titulo-urbano">Lisboa</span>
+            <span class="grafico-contexto">Hotel urbano</span>
+          </figcaption>
+          <div data-grafico="urbano"></div>
+          <p class="diferencia" data-diferencia="urbano" hidden></p>
+        </figure>
+        <figure class="grafico grafico-hotel" aria-labelledby="titulo-vacacional">
+          <figcaption>
+            <span class="grafico-titulo" id="titulo-vacacional">Algarve</span>
+            <span class="grafico-contexto">Hotel vacacional</span>
+          </figcaption>
+          <div data-grafico="vacacional"></div>
+          <p class="diferencia" data-diferencia="vacacional" hidden></p>
+        </figure>
+      </div>
+    </section>
+
+    <section class="escena escena-comprobacion" id="comprobacion" aria-labelledby="titulo-comprobacion">
+      <div class="contenedor comprobacion-interior">
+        <header class="escena-encabezado">
+          <h2 id="titulo-comprobacion">¿Y si contamos solo las cancelaciones?</h2>
+          <p>La diferencia se mantiene al contar solo cancelaciones. Usa el selector para ver cuánto cambia la tasa de cada grupo al retirar del recuento las reservas de quienes no se presentaron.</p>
+        </header>
+        <div class="panel-comprobacion">
+          <fieldset class="selector" aria-describedby="nota-denominador">
+            <legend>Qué se cuenta</legend>
+            <div class="opciones">
+              <label>
+                <input type="radio" name="medida" value="canceladas_o_ausentes" checked>
+                <span>Cancelaciones y no presentaciones</span>
+              </label>
+              <label>
+                <input type="radio" name="medida" value="solo_canceladas">
+                <span>Solo cancelaciones</span>
+              </label>
+            </div>
+          </fieldset>
+          <figure class="grafico grafico-comprobacion" aria-labelledby="medida-titulo">
+            <figcaption>
+              <span class="grafico-titulo" id="medida-titulo">Cancelación o no presentación</span>
+              <span class="grafico-contexto">Tasa por origen del cliente · Ambos hoteles</span>
+            </figcaption>
+            <div data-grafico="comprobacion"></div>
+            <p class="diferencia" data-diferencia="comprobacion" hidden></p>
+          </figure>
+          <p class="nota-panel" id="nota-denominador">El total de reservas de cada origen se mantiene. La brecha se calcula antes de redondear las tasas.</p>
+          <p class="solo-lectores" id="resultado-medida" role="status" aria-atomic="true"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="escena escena-cierre contenedor" id="lectura" aria-labelledby="titulo-cierre">
+      <h2 id="titulo-cierre">De la reserva <em>a la estancia</em></h2>
+      <p class="cierre-principal">Por cada 100 reservas, se completaron unas <strong>42 estancias</strong> en el grupo de origen Portugal y <strong>76</strong> en el resto de orígenes conocidos.</p>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <h2>Datos y método</h2>
+      <p><cite>Hotel Booking Demand Datasets</cite>, de Nuno António, Ana de Almeida y Luís Nunes. Llegadas previstas a los dos hoteles entre julio de 2015 y agosto de 2017.</p>
+      <p>Cada tasa se calcula sobre las reservas de su grupo. La comparación deja fuera las 467 reservas sin origen informado. El gráfico por país aplica el mismo mínimo de 1.000 reservas que el cuaderno de análisis. El total reúne las cancelaciones y las no presentaciones. Las estancias completadas corresponden al estado <i>Check-Out</i>.</p>
+    </div>
+  </footer>
+
+  <template id="plantilla-grafico">
+    <ul class="barras"></ul>
+    <div class="escala" aria-hidden="true"><span>0 %</span><span>25 %</span><span>50 %</span><span>75 %</span><span>100 %</span></div>
+  </template>
+  <template id="plantilla-barra">
+    <li class="barra">
+      <div class="barra-datos">
+        <span class="barra-grupo"></span>
+        <strong class="barra-valor"></strong>
+      </div>
+      <div class="barra-pista" aria-hidden="true"><div class="barra-relleno"></div></div>
+      <span class="barra-base"></span>
+    </li>
+  </template>
+  <template id="plantilla-pais-caso">
+    <article class="pais-caso">
+      <p class="pais-caso-contexto"></p>
+      <div class="pais-caso-dato"><h4></h4><strong></strong></div>
+      <div class="pais-punto-pista" aria-hidden="true"><span class="pais-punto"></span></div>
+      <p class="pais-caso-base"></p>
+    </article>
+  </template>
+  <template id="plantilla-posicion">
+    <figure class="grafico posicion-tarjeta">
+      <figcaption class="grafico-titulo"></figcaption>
+      <p class="posicion-frase"><strong></strong></p>
+      <p class="posicion-tasa"></p>
+      <div class="posicion-pista" aria-hidden="true">
+        <span class="posicion-inferiores"></span>
+        <span class="posicion-empates"></span>
+        <span class="posicion-superiores"></span>
+      </div>
+      <ul class="posicion-leyenda">
+        <li class="detalle-inferiores"></li>
+        <li class="detalle-empates" hidden></li>
+        <li class="detalle-superiores"></li>
+      </ul>
+    </figure>
+  </template>
+</body>
+</html>
