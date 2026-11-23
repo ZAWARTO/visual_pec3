@@ -22,7 +22,7 @@
         <a href="#brecha">La brecha</a>
         <a href="#paises">Por país</a>
         <a href="#hoteles">Por hotel</a>
-        <a href="#comprobacion">Comprobación</a>
+        <a href="#lectura">Conclusión</a>
       </nav>
     </div>
   </header>
@@ -32,7 +32,7 @@
       <div class="portada-texto">
         <p class="contexto">Lisboa y Algarve <span aria-hidden="true">·</span> 2015–2017</p>
         <h1 id="titulo">Dos hoteles, una <em>brecha de cancelación</em></h1>
-        <p class="entradilla">Las reservas de clientes con origen registrado en Portugal se cancelaron o quedaron sin presentación más a menudo que las del resto agrupado. El desglose por país muestra qué orígenes se acercan y cuántas reservas hay detrás de cada tasa.</p>
+        <p class="entradilla">En estos dos hoteles, unas 58 de cada 100 reservas de clientes con origen registrado en Portugal acabaron en cancelación o no presentación, frente a 24 en el resto. ¿Qué cambia al comparar reservas sin depósito?</p>
       </div>
       <figure class="grafico grafico-principal" aria-labelledby="titulo-total">
         <figcaption>
@@ -110,69 +110,61 @@
       </div>
     </section>
 
-    <section class="escena contenedor" id="hoteles" aria-labelledby="titulo-hoteles">
-      <header class="escena-encabezado">
-        <p class="contexto">Cancelación o no presentación</p>
-        <h2 id="titulo-hoteles">La brecha es mayor <em>en Lisboa</em></h2>
-        <p>Al volver a la comparación entre Portugal y el resto agrupado, la diferencia se observa en ambos establecimientos. El hotel de Lisboa registra tasas más altas en los dos grupos.</p>
-      </header>
-      <div class="rejilla-hoteles">
-        <figure class="grafico grafico-hotel" aria-labelledby="titulo-urbano">
-          <figcaption>
-            <span class="grafico-titulo" id="titulo-urbano">Lisboa</span>
-            <span class="grafico-contexto">Hotel urbano</span>
-          </figcaption>
-          <div data-grafico="urbano"></div>
-          <p class="diferencia" data-diferencia="urbano" hidden></p>
-        </figure>
-        <figure class="grafico grafico-hotel" aria-labelledby="titulo-vacacional">
-          <figcaption>
-            <span class="grafico-titulo" id="titulo-vacacional">Algarve</span>
-            <span class="grafico-contexto">Hotel vacacional</span>
-          </figcaption>
-          <div data-grafico="vacacional"></div>
-          <p class="diferencia" data-diferencia="vacacional" hidden></p>
-        </figure>
-      </div>
-    </section>
-
-    <section class="escena escena-comprobacion" id="comprobacion" aria-labelledby="titulo-comprobacion">
-      <div class="contenedor comprobacion-interior">
-        <header class="escena-encabezado">
-          <h2 id="titulo-comprobacion">¿Y si contamos solo las cancelaciones?</h2>
-          <p>La diferencia se mantiene al contar solo cancelaciones. Usa el selector para ver cuánto cambia la tasa de cada grupo al retirar del recuento las reservas de quienes no se presentaron.</p>
-        </header>
-        <div class="panel-comprobacion">
-          <fieldset class="selector" aria-describedby="nota-denominador">
-            <legend>Qué se cuenta</legend>
-            <div class="opciones">
-              <label>
-                <input type="radio" name="medida" value="canceladas_o_ausentes" checked>
-                <span>Cancelaciones y no presentaciones</span>
-              </label>
-              <label>
-                <input type="radio" name="medida" value="solo_canceladas">
-                <span>Solo cancelaciones</span>
-              </label>
+    <section class="escena escena-hoteles" id="hoteles" aria-labelledby="titulo-hoteles">
+      <div class="contenedor">
+        <div class="hoteles-cabecera">
+          <header class="escena-encabezado">
+            <p class="contexto">Por hotel</p>
+            <h2 id="titulo-hoteles">¿En qué hotel es mayor <em>la brecha?</em></h2>
+            <p>La brecha mide cuántos puntos separan la tasa de cancelación o no presentación de Portugal y la del resto de orígenes.</p>
+          </header>
+          <div class="controles-hoteles">
+            <fieldset class="selector" id="selector-cartera">
+              <legend>Reservas que se comparan</legend>
+              <div class="opciones">
+                <label>
+                  <input type="radio" name="cartera" value="todas" aria-controls="graficos-hoteles" checked>
+                  <span>Todas las reservas</span>
+                </label>
+                <label>
+                  <input type="radio" name="cartera" value="sin_deposito" aria-controls="graficos-hoteles">
+                  <span>Sin depósito registrado</span>
+                </label>
+              </div>
+            </fieldset>
+            <div id="lectura-cartera" role="status" aria-atomic="true">
+              <p id="resultado-cartera"></p>
+              <p id="cobertura-cartera"></p>
             </div>
-          </fieldset>
-          <figure class="grafico grafico-comprobacion" aria-labelledby="medida-titulo">
+          </div>
+        </div>
+        <div class="rejilla-hoteles" id="graficos-hoteles">
+          <figure class="grafico grafico-hotel" aria-labelledby="titulo-urbano">
             <figcaption>
-              <span class="grafico-titulo" id="medida-titulo">Cancelación o no presentación</span>
-              <span class="grafico-contexto">Tasa por origen del cliente · Ambos hoteles</span>
+              <span class="grafico-titulo" id="titulo-urbano">Lisboa</span>
+              <span class="grafico-contexto">Hotel urbano</span>
             </figcaption>
-            <div data-grafico="comprobacion"></div>
-            <p class="diferencia" data-diferencia="comprobacion" hidden></p>
+            <div data-grafico="urbano"></div>
+            <p class="diferencia" data-diferencia="urbano" hidden></p>
           </figure>
-          <p class="nota-panel" id="nota-denominador">El total de reservas de cada origen se mantiene. La brecha se calcula antes de redondear las tasas.</p>
-          <p class="solo-lectores" id="resultado-medida" role="status" aria-atomic="true"></p>
+          <figure class="grafico grafico-hotel" aria-labelledby="titulo-vacacional">
+            <figcaption>
+              <span class="grafico-titulo" id="titulo-vacacional">Algarve</span>
+              <span class="grafico-contexto">Hotel vacacional</span>
+            </figcaption>
+            <div data-grafico="vacacional"></div>
+            <p class="diferencia" data-diferencia="vacacional" hidden></p>
+          </figure>
         </div>
       </div>
     </section>
 
     <section class="escena escena-cierre contenedor" id="lectura" aria-labelledby="titulo-cierre">
-      <h2 id="titulo-cierre">De la reserva <em>a la estancia</em></h2>
-      <p class="cierre-principal">Por cada 100 reservas, se completaron unas <strong>42 estancias</strong> en el grupo de origen Portugal y <strong>76</strong> en el resto de orígenes conocidos.</p>
+      <h2 id="titulo-cierre">La brecha se reduce <em>casi a la mitad</em></h2>
+      <div>
+        <p class="cierre-principal">En los dos hoteles juntos, la diferencia entre Portugal y el resto pasa de <strong id="brecha-todas">34,3 puntos</strong> a <strong id="brecha-sin-deposito">16,7</strong> al comparar solo las reservas sin depósito registrado.</p>
+        <p class="cierre-detalle">En el <strong id="pago-portugal">30,1 %</strong> de las reservas de origen Portugal figuraba un pago que cubría toda la estancia. En el resto de orígenes, esa proporción era del <strong id="pago-resto">0,6 %</strong>.</p>
+      </div>
     </section>
   </main>
 
@@ -180,7 +172,8 @@
     <div class="contenedor">
       <h2>Datos y método</h2>
       <p><cite>Hotel Booking Demand Datasets</cite>, de Nuno António, Ana de Almeida y Luís Nunes. Llegadas previstas a los dos hoteles entre julio de 2015 y agosto de 2017.</p>
-      <p>Cada tasa se calcula sobre las reservas de su grupo. La comparación deja fuera las 467 reservas sin origen informado. El gráfico por país aplica el mismo mínimo de 1.000 reservas que el cuaderno de análisis. El total reúne las cancelaciones y las no presentaciones. Las estancias completadas corresponden al estado <i>Check-Out</i>.</p>
+      <p>Cada tasa se calcula sobre las reservas de su grupo con origen informado. El top 10 compara orígenes con al menos 1.000 reservas. El total reúne cancelaciones y no presentaciones. Las brechas se calculan antes del redondeo.</p>
+      <p>Los autores clasificaron el depósito con los pagos registrados antes de la llegada o de la cancelación. Para atribuir un efecto al prepago haría falta conocer las condiciones ofrecidas al reservar.</p>
     </div>
   </footer>
 

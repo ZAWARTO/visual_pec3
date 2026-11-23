@@ -701,11 +701,12 @@ h1 em, .escena h2 em {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .grafico-hotel {
   border-top: 3px solid var(--linea);
+  padding: clamp(1rem, 2.2vw, 1.5rem);
 }
 
 .grafico-hotel .grafico-titulo {
@@ -715,7 +716,7 @@ h1 em, .escena h2 em {
   letter-spacing: -0.035em;
 }
 
-.escena-comprobacion {
+.escena-hoteles {
   --tinta: #f1f7f3;
   --texto: #d0e1da;
   --secundario: #b6cbc4;
@@ -728,20 +729,19 @@ h1 em, .escena h2 em {
   --barra-resto: #a1b1ba;
   background: #18363a;
   color: var(--tinta);
+  padding-block: clamp(2.75rem, 4.3vw, 4.25rem);
 }
 
-.comprobacion-interior {
+.hoteles-cabecera {
   display: grid;
-  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2.5rem);
   align-items: center;
-  gap: clamp(1.5rem, 6vw, 5.2rem);
-}
-
-.panel-comprobacion {
-  min-width: 0;
+  margin-bottom: 1.55rem;
 }
 
 .selector {
+  max-width: 28rem;
   min-width: 0;
   margin: 0 0 1rem;
   padding: 0;
@@ -806,14 +806,19 @@ h1 em, .escena h2 em {
   outline-offset: 2px;
 }
 
-.grafico-comprobacion .barra-relleno {
+.grafico-hotel .barra-relleno {
   transition: inline-size 210ms ease-out;
 }
 
-.nota-panel {
-  margin-top: 0.65rem;
+#resultado-cartera {
+  color: var(--tinta);
+  font-size: clamp(1.03rem, 1.7vw, 1.3rem);
+  font-weight: 680;
+}
+
+#cobertura-cartera {
   color: var(--secundario);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
 }
 
 .escena-cierre {
@@ -837,6 +842,12 @@ h1 em, .escena h2 em {
 .cierre-principal strong {
   color: var(--tinta);
   white-space: nowrap;
+}
+
+.cierre-detalle {
+  max-width: 57ch;
+  margin-top: 0.85rem;
+  color: var(--texto);
 }
 
 .pie {
@@ -866,7 +877,7 @@ h1 em, .escena h2 em {
 }
 
 @media (max-width: 860px) {
-  .portada, .rejilla-paises, .comprobacion-interior {
+  .portada, .rejilla-paises, .hoteles-cabecera {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -882,7 +893,7 @@ h1 em, .escena h2 em {
     max-width: 43rem;
   }
 
-  .portada h1, .comprobacion-interior h2 {
+  .portada h1 {
     text-wrap: wrap;
   }
 }
@@ -946,7 +957,7 @@ h1 em, .escena h2 em {
     scroll-behavior: auto;
   }
 
-  .grafico-comprobacion .barra-relleno {
+  .grafico-hotel .barra-relleno {
     transition: none;
   }
 }

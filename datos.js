@@ -51,6 +51,54 @@ window.DATOS_RESERVAS = {
       }
     }
   },
+  "grupos_sin_deposito": {
+    "total": {
+      "portugal": {
+        "reservas": 32801,
+        "canceladas_o_ausentes": 13168,
+        "solo_canceladas": 12460,
+        "solo_no_presentadas": 708
+      },
+      "resto": {
+        "reservas": 69393,
+        "canceladas_o_ausentes": 16269,
+        "solo_canceladas": 15836,
+        "solo_no_presentadas": 433
+      }
+    },
+    "urbano": {
+      "portugal": {
+        "reservas": 17226,
+        "canceladas_o_ausentes": 7262,
+        "solo_canceladas": 6760,
+        "solo_no_presentadas": 502
+      },
+      "resto": {
+        "reservas": 47974,
+        "canceladas_o_ausentes": 12853,
+        "solo_canceladas": 12470,
+        "solo_no_presentadas": 383
+      }
+    },
+    "vacacional": {
+      "portugal": {
+        "reservas": 15575,
+        "canceladas_o_ausentes": 5906,
+        "solo_canceladas": 5700,
+        "solo_no_presentadas": 206
+      },
+      "resto": {
+        "reservas": 21419,
+        "canceladas_o_ausentes": 3416,
+        "solo_canceladas": 3366,
+        "solo_no_presentadas": 50
+      }
+    }
+  },
+  "pago_integro": {
+    "portugal": 14175,
+    "resto": 397
+  },
   "paises": [
     {
       "codigo": "ABW",

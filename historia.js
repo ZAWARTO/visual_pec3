@@ -26,6 +26,10 @@ function porcentaje(grupo, medida) {
   return 100 * grupo[medida] / grupo.reservas;
 }
 
+function brecha(grupos) {
+  return porcentaje(grupos.portugal, principal) - porcentaje(grupos.resto, principal);
+}
+
 function rotulo(valor, medida) {
   const formato = medida === sinPresentacion ? centesimal : decimal;
   return `${formato.format(valor)} %`;
@@ -58,17 +62,16 @@ function crearGrafico(id) {
   return { filas, nota: document.querySelector(`[data-diferencia="${id}"]`) };
 }
 
-function mostrar(grafico, grupos, medida) {
+function mostrar(grafico, grupos) {
   for (const [origen, fila] of Object.entries(grafico.filas)) {
     const grupo = grupos[origen];
-    const tasa = porcentaje(grupo, medida);
+    const tasa = porcentaje(grupo, principal);
     fila.valor.textContent = rotulo(tasa);
     fila.relleno.style.inlineSize = `${tasa}%`;
-    fila.base.textContent = `${entero.format(grupo[medida])} de ${entero.format(grupo.reservas)} reservas`;
+    fila.base.textContent = `${entero.format(grupo[principal])} de ${entero.format(grupo.reservas)} reservas`;
   }
 
-  const brecha = porcentaje(grupos.portugal, medida) - porcentaje(grupos.resto, medida);
-  grafico.nota.textContent = `${decimal.format(brecha)} puntos porcentuales de diferencia`;
+  grafico.nota.textContent = `${decimal.format(brecha(grupos))} puntos porcentuales de diferencia`;
   grafico.nota.hidden = false;
 }
 
@@ -212,33 +215,45 @@ function mostrarPaises() {
   mostrarCasosPaises(portugal, otros);
 }
 
+function mostrarHoteles() {
+  const selector = document.querySelector("#selector-cartera");
+  const lisboa = crearGrafico("urbano");
+  const algarve = crearGrafico("vacacional");
+  const resultado = document.querySelector("#resultado-cartera");
+  const cobertura = document.querySelector("#cobertura-cartera");
+  function actualizar() {
+    const filtrado = selector.querySelector("input:checked").value === "sin_deposito";
+    const grupos = filtrado ? datos.grupos_sin_deposito : datos.grupos;
+    mostrar(lisboa, grupos.urbano);
+    mostrar(algarve, grupos.vacacional);
+    const puntosLisboa = brecha(grupos.urbano);
+    const puntosAlgarve = brecha(grupos.vacacional);
+    resultado.textContent = puntosLisboa > puntosAlgarve
+      ? `Lisboa presenta la mayor brecha, con ${decimal.format(puntosLisboa)} puntos frente a ${decimal.format(puntosAlgarve)} en el Algarve.`
+      : `El Algarve presenta la mayor brecha, con ${decimal.format(puntosAlgarve)} puntos frente a ${decimal.format(puntosLisboa)} en Lisboa.`;
+    const n = grupos.total.portugal.reservas + grupos.total.resto.reservas;
+    cobertura.textContent = filtrado
+      ? `${entero.format(n)} reservas sin depósito registrado · ${rotulo(100 * n / datos.muestra.con_origen)} de las que tienen origen informado`
+      : `${entero.format(n)} reservas con origen informado · Ambos hoteles`;
+  }
+  actualizar();
+  selector.addEventListener("change", actualizar);
+}
+
 function iniciar() {
   for (const campo of document.querySelectorAll("[data-muestra]")) {
     campo.textContent = entero.format(datos.muestra[campo.dataset.muestra]);
   }
-
-  for (const id of ["total", "urbano", "vacacional"]) {
-    mostrar(crearGrafico(id), datos.grupos[id], principal);
-  }
+  mostrar(crearGrafico("total"), datos.grupos.total);
   mostrarPaises();
+  mostrarHoteles();
 
-  const grafico = crearGrafico("comprobacion");
-  const selector = document.querySelector(".selector");
-  const titulo = document.querySelector("#medida-titulo");
-  const estado = document.querySelector("#resultado-medida");
-  const total = datos.grupos.total;
-
-  function actualizar(anunciar) {
-    const medida = selector.querySelector("input:checked").value;
-    titulo.textContent = medidas[medida];
-    mostrar(grafico, total, medida);
-    if (anunciar) {
-      estado.textContent = `${medidas[medida]}. ${origenes.portugal}, ${rotulo(porcentaje(total.portugal, medida))}. ${origenes.resto}, ${rotulo(porcentaje(total.resto, medida))}.`;
-    }
+  document.querySelector("#brecha-todas").textContent = `${decimal.format(brecha(datos.grupos.total))} puntos`;
+  document.querySelector("#brecha-sin-deposito").textContent = decimal.format(brecha(datos.grupos_sin_deposito.total));
+  for (const origen of Object.keys(origenes)) {
+    document.querySelector(`#pago-${origen}`).textContent =
+      rotulo(100 * datos.pago_integro[origen] / datos.grupos.total[origen].reservas);
   }
-
-  actualizar(false);
-  selector.addEventListener("change", () => actualizar(true));
 }
 
 if (datos) {
